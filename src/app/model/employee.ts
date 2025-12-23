@@ -8,12 +8,11 @@ export class employeeModal {
     address: string;
 
     constructor() {
-        this.address = '';
         this.city = '';
         this.contactNo = '';
         this.address = '';
         this.emailId = '';
-        this.empId = 0;
+        this.empId = 1;
         this.state = '';
         this.name = '';
     }

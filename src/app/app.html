@@ -8,15 +8,30 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12">
-              <table>
+              <table class="table table-bordered">
                 <thead>
                   <tr>
                     <th>Sr No</th>
                     <th>Name</th>
                     <th>Contact No</th>
                     <th>Email-Id</th>
+                    <th class="text-center">Action</th>
                   </tr>
                 </thead>
+                <tbody>
+                  @for (item of employeeList; track $index) {
+                    <tr>
+                      <td>{{$index+1}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.contactNo}}</td>
+                      <td>{{item.emailId}}</td>
+                      <td class="text-center">
+                        <button class="btn btn-primary" (click)="onEdit(item)" type="button">Edit</button>
+                        <button class="btn btn-danger mx-2" type="button">Delete</button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
               </table>
             </div>
           </div>
@@ -29,36 +44,47 @@
           <h6>New Employee</h6>
         </div>
         <div class="card-body">
-          <div class="row gy-2">
-            <div class="col-6">
-              <label for="">Name</label>
-              <input type="text" class="form-control">
+          <form [formGroup]="employeeForm">
+            <div class="row gy-2">
+              <div class="col-12">
+                <label for="">Name</label>
+                <input type="text" class="form-control" formControlName="name">
+              </div>
+              <div class="col-6">
+                <label for="">Email-Id</label>
+                <input type="text" class="form-control" formControlName="emailId">
+              </div>
+              <div class="col-6">
+                <label for="">ContactNo</label>
+                <input type="text" class="form-control" formControlName="contactNo">
+              </div>
+              <div class="col-6">
+                <label for="">City</label>
+                <input type="text" class="form-control" formControlName="city">
+              </div>
+              <div class="col-6">
+                <label for="">State</label>
+                <input type="text" class="form-control" formControlName="state">
+              </div>
+              <div class="col-12">
+                <label for="">Address</label>
+                <textarea class="form-control" formControlName="address"></textarea>
+              </div>
             </div>
-            <div class="col-6">
-              <label for="">Email-Id</label>
-              <input type="text" class="form-control">
+            <div class="row pt-3">
+              <div class="col-6 text-center">
+                <button class="btn btn-secondary" type="button">Reset</button>
+              </div>
+              <div class="col-6 text-center">
+                @if(employeeForm.controls['empId'].value == '1' ) {
+                  <button class="btn btn-primary" type="button" (click)="onSave()">Submit</button>
+                } @else {
+                  <button class="btn btn-warning" type="button" (click)="onSave()">Update</button>
+                }
+                
+              </div>
             </div>
-            <div class="col-6">
-              <label for="">ContactNo</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-6">
-              <label for="">City</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-6">
-              <label for="">State</label>
-              <input type="text" class="form-control">
-            </div>
-          </div>
-          <div class="row pt-3">
-            <div class="col-6 text-center">
-              <button class="btn btn-secondary" type="button">Reset</button>
-            </div>
-            <div class="col-6 text-center">
-              <button class="btn btn-primary" type="button">Submit</button>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
