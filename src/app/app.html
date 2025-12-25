@@ -27,7 +27,7 @@
                       <td>{{item.emailId}}</td>
                       <td class="text-center">
                         <button class="btn btn-primary" (click)="onEdit(item)" type="button">Edit</button>
-                        <button class="btn btn-danger mx-2" type="button">Delete</button>
+                        <button class="btn btn-danger mx-2" type="button" (click)="onDelete(item.empId)">Delete</button>
                       </td>
                     </tr>
                   }
@@ -49,14 +49,23 @@
               <div class="col-12">
                 <label for="">Name</label>
                 <input type="text" class="form-control" formControlName="name">
+                @if(isInvalid('name')) {
+                  <small class="text-danger">Name is required</small>
+                }
               </div>
               <div class="col-6">
                 <label for="">Email-Id</label>
                 <input type="text" class="form-control" formControlName="emailId">
+                @if(isInvalid('emailId')) {
+                  <small class="text-danger">Email Id is required</small>
+                }
               </div>
               <div class="col-6">
                 <label for="">ContactNo</label>
                 <input type="text" class="form-control" formControlName="contactNo">
+                @if(isInvalid('contactNo')) {
+                  <small class="text-danger">Contact No is required</small>
+                }
               </div>
               <div class="col-6">
                 <label for="">City</label>
@@ -73,15 +82,14 @@
             </div>
             <div class="row pt-3">
               <div class="col-6 text-center">
-                <button class="btn btn-secondary" type="button">Reset</button>
+                <button class="btn btn-secondary" type="button" (click)="onReset()">Reset</button>
               </div>
               <div class="col-6 text-center">
-                @if(employeeForm.controls['empId'].value == '1' ) {
+                @if(!isEditMode) {
                   <button class="btn btn-primary" type="button" (click)="onSave()">Submit</button>
                 } @else {
-                  <button class="btn btn-warning" type="button" (click)="onSave()">Update</button>
-                }
-                
+                  <button class="btn btn-warning" type="button" (click)="onUpdate()">Update</button>
+                }                
               </div>
             </div>
           </form>

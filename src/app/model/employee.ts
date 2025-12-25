@@ -1,4 +1,4 @@
-export class employeeModal {
+export class EmployeeModel {
     empId: number;
     name: string;
     emailId: string;
